@@ -1,0 +1,20 @@
+[
+    {
+        "nombre": "Andres Ureta",
+        "pagos": [
+            20000
+        ]
+    },
+    {
+        "nombre": "Maic",
+        "pagos": [
+            20000
+        ]
+    },
+    {
+        "nombre": "Juan Diego",
+        "pagos": [
+            20000
+        ]
+    }
+]
