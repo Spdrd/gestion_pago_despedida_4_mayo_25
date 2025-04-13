@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 RUTA_DATOS = "datos.json"
 
@@ -22,7 +23,7 @@ def agregar_pago(nombre, monto, ruta=RUTA_DATOS):
     personas = cargar_datos(ruta)
     for persona in personas:
         if persona["nombre"] == nombre:
-            persona["pagos"].append(monto)
+            persona["pagos"].append({"fecha": date.today().isoformat(), "valor": monto})
             guardar_datos(personas, ruta)
             return True
     return False  # No se encontró la persona

@@ -58,7 +58,7 @@ class Pantalla:
         nombre_seleccionado = self.combo_nombres.get()
         for persona in self.personas:
             if persona["nombre"] == nombre_seleccionado:
-                suma = sum(persona["pagos"])
+                suma = sum(p["valor"] for p in persona["pagos"])
                 suma_formateada = formatear_con_puntos(suma)
                 self.label_resultado.config(text=f"Suma de pagos: ${suma_formateada}")
                 break
