@@ -53,8 +53,20 @@ class Pantalla:
         self.boton_agregar_nombre = ctk.CTkButton(self.ventana, text="Agregar Persona", command=self.agregar_persona)
         self.boton_agregar_nombre.pack(pady=5)
 
+        # Label Total
+        self.label_total_general = ctk.CTkLabel(self.ventana, text="Total general: $0")
+        self.label_total_general.pack(pady=5)
+        self.mostrar_total_general()
+
+
         # Ejecutar app
         self.ventana.mainloop()
+
+    def mostrar_total_general(self):
+        total = sum(pago["valor"] for persona in self.personas for pago in persona["pagos"])
+        total_formateado = formatear_con_puntos(total)
+        self.label_total_general.configure(text=f"Total general: ${total_formateado}")
+
 
     def mostrar_suma(self, *args):
         nombre_seleccionado = self.combo_nombres.get()
@@ -77,6 +89,8 @@ class Pantalla:
         repo.agregar_pago(nombre, monto)
         self.personas = repo.cargar_datos()
         self.mostrar_suma()
+        self.mostrar_total_general()
+
 
     def agregar_persona(self):
         nuevo_nombre = self.entry_nuevo_nombre.get().strip()
@@ -97,3 +111,6 @@ class Pantalla:
         self.combo_nombres.configure(values=[p["nombre"] for p in self.personas])
         self.entry_nuevo_nombre.delete(0, 'end')
         self.label_resultado.configure(text=f"{nuevo_nombre} añadido correctamente")
+        self.mostrar_total_general()
+
+
